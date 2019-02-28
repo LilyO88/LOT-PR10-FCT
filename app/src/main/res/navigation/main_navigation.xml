@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nextVisitsListFragment">
+
+    <fragment
+        android:id="@+id/nextVisitsListFragment"
+        android:name="com.example.lot_pr10_fct.ui.visits.nextVisitsList.NextVisitsListFragment"
+        android:label="Próximas visitas"
+        tools:layout="@layout/fragment_next_visits_list" >
+        <action
+            android:id="@+id/action_nextVisitsListFragment_to_newVisitFragment"
+            app:destination="@id/newVisitFragment" />
+        <action
+            android:id="@+id/action_nextVisitsListFragment_to_editVisitFragment"
+            app:destination="@id/editVisitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newVisitFragment"
+        android:name="com.example.lot_pr10_fct.ui.visits.newVisit.NewVisitFragment"
+        android:label="fragment_new_visit"
+        tools:layout="@layout/fragment_new_visit" />
+    <fragment
+        android:id="@+id/editVisitFragment"
+        android:name="com.example.lot_pr10_fct.ui.visits.editVisit.EditVisitFragment"
+        android:label="fragment_edit_visit"
+        tools:layout="@layout/fragment_edit_visit" />
+    <fragment
+        android:id="@+id/studentVisitsListFragment"
+        android:name="com.example.lot_pr10_fct.ui.studentVisitsList.StudentVisitsListFragment"
+        android:label="fragment_student_visits_list"
+        tools:layout="@layout/fragment_student_visits_list" >
+        <action
+            android:id="@+id/action_studentVisitsListFragment_to_newStudentFragment"
+            app:destination="@id/newStudentFragment" />
+        <action
+            android:id="@+id/action_studentVisitsListFragment_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/companiesListFragment"
+        android:name="com.example.lot_pr10_fct.ui.company.companiesList.CompaniesListFragment"
+        android:label="fragment_companies_list"
+        tools:layout="@layout/fragment_companies_list" >
+        <action
+            android:id="@+id/action_companiesListFragment_to_newCompanyFragment"
+            app:destination="@id/newCompanyFragment" />
+        <action
+            android:id="@+id/action_companiesListFragment_to_editCompanyFragment"
+            app:destination="@id/editCompanyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editCompanyFragment"
+        android:name="com.example.lot_pr10_fct.ui.company.editCompany.EditCompanyFragment"
+        android:label="fragment_edit_company"
+        tools:layout="@layout/fragment_edit_company" />
+    <fragment
+        android:id="@+id/editStudentFragment"
+        android:name="com.example.lot_pr10_fct.ui.student.editStudent.EditStudentFragment"
+        android:label="fragment_edit_student"
+        tools:layout="@layout/fragment_edit_student" />
+    <fragment
+        android:id="@+id/newCompanyFragment"
+        android:name="com.example.lot_pr10_fct.ui.company.newCompany.NewCompanyFragment"
+        android:label="fragment_new_company"
+        tools:layout="@layout/fragment_new_company" />
+    <fragment
+        android:id="@+id/newStudentFragment"
+        android:name="com.example.lot_pr10_fct.ui.student.newStudent.NewStudentFragment"
+        android:label="fragment_new_student"
+        tools:layout="@layout/fragment_new_student" />
+
+</navigation>

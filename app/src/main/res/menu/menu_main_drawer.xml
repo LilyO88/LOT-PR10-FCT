@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group01"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nextVisitsListFragment"
+            android:title="Visitas"/>
+        <item
+            android:id="@+id/destStudentsListFragment"
+            android:title="Alumnos"/>
+        <item
+            android:id="@+id/destCompaniesListFragment"
+            android:title="Empresas"/>
+    </group>
+    <group >
+        <item
+            android:id="@+id/destAboutFragment"
+            android:title="Acerca de"/>
+    </group>
+</menu>

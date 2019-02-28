@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LOT-PR10-FCT</string>
+    <string name="title_drawer_header">Centro de prácticas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
