@@ -2,11 +2,15 @@ package com.example.lot_pr10_fct.ui.visits.nextVisitsList;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +21,8 @@ import com.example.lot_pr10_fct.R;
 public class NextVisitsListFragment extends Fragment {
 
     private NextVisitsListFragmentViewModel mViewModel;
+    private NavController navController;
 
-    public static NextVisitsListFragment newInstance() {
-        return new NextVisitsListFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -31,8 +33,10 @@ public class NextVisitsListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NextVisitsListFragmentViewModel.class);
-        // TODO: Use the ViewModel
+        navController = NavHostFragment.findNavController(this);
+        //vm
+        requireActivity().findViewById(R.id.nvl_fab).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.newVisitFragment));
     }
+
 
 }

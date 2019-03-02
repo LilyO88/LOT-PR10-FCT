@@ -9,41 +9,35 @@
         android:id="@+id/nextVisitsListFragment"
         android:name="com.example.lot_pr10_fct.ui.visits.nextVisitsList.NextVisitsListFragment"
         android:label="Próximas visitas"
-        tools:layout="@layout/fragment_next_visits_list" >
+        tools:layout="@layout/fragment_next_visits_list">
         <action
             android:id="@+id/action_nextVisitsListFragment_to_newVisitFragment"
             app:destination="@id/newVisitFragment" />
         <action
             android:id="@+id/action_nextVisitsListFragment_to_editVisitFragment"
-            app:destination="@id/editVisitFragment" />
+            app:destination="@id/editVisitFragment"/>
     </fragment>
+
+
+    <!--app:popUpTo="@id/nextVisitsListFragment"-->
+    <!--app:popUpToInclusive="true"-->
+
     <fragment
         android:id="@+id/newVisitFragment"
         android:name="com.example.lot_pr10_fct.ui.visits.newVisit.NewVisitFragment"
-        android:label="fragment_new_visit"
+        android:label="Nueva visita"
         tools:layout="@layout/fragment_new_visit" />
+
     <fragment
         android:id="@+id/editVisitFragment"
         android:name="com.example.lot_pr10_fct.ui.visits.editVisit.EditVisitFragment"
-        android:label="fragment_edit_visit"
+        android:label="Editar visita"
         tools:layout="@layout/fragment_edit_visit" />
-    <fragment
-        android:id="@+id/studentVisitsListFragment"
-        android:name="com.example.lot_pr10_fct.ui.studentVisitsList.StudentVisitsListFragment"
-        android:label="fragment_student_visits_list"
-        tools:layout="@layout/fragment_student_visits_list" >
-        <action
-            android:id="@+id/action_studentVisitsListFragment_to_newStudentFragment"
-            app:destination="@id/newStudentFragment" />
-        <action
-            android:id="@+id/action_studentVisitsListFragment_to_editStudentFragment"
-            app:destination="@id/editStudentFragment" />
-    </fragment>
     <fragment
         android:id="@+id/companiesListFragment"
         android:name="com.example.lot_pr10_fct.ui.company.companiesList.CompaniesListFragment"
-        android:label="fragment_companies_list"
-        tools:layout="@layout/fragment_companies_list" >
+        android:label="Empresas"
+        tools:layout="@layout/fragment_companies_list">
         <action
             android:id="@+id/action_companiesListFragment_to_newCompanyFragment"
             app:destination="@id/newCompanyFragment" />
@@ -51,25 +45,57 @@
             android:id="@+id/action_companiesListFragment_to_editCompanyFragment"
             app:destination="@id/editCompanyFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/editCompanyFragment"
         android:name="com.example.lot_pr10_fct.ui.company.editCompany.EditCompanyFragment"
-        android:label="fragment_edit_company"
+        android:label="Editar empresa"
         tools:layout="@layout/fragment_edit_company" />
+
     <fragment
         android:id="@+id/editStudentFragment"
         android:name="com.example.lot_pr10_fct.ui.student.editStudent.EditStudentFragment"
-        android:label="fragment_edit_student"
+        android:label="Editar estudiante"
         tools:layout="@layout/fragment_edit_student" />
+
     <fragment
         android:id="@+id/newCompanyFragment"
         android:name="com.example.lot_pr10_fct.ui.company.newCompany.NewCompanyFragment"
-        android:label="fragment_new_company"
+        android:label="Nueva empresa"
         tools:layout="@layout/fragment_new_company" />
+
     <fragment
         android:id="@+id/newStudentFragment"
         android:name="com.example.lot_pr10_fct.ui.student.newStudent.NewStudentFragment"
-        android:label="fragment_new_student"
+        android:label="Nuevo estudiante"
         tools:layout="@layout/fragment_new_student" />
+
+    <fragment
+        android:id="@+id/studentsListFragment"
+        android:name="com.example.lot_pr10_fct.ui.student.studentsList.StudentsListFragment"
+        android:label="Estudiantes"
+        tools:layout="@layout/fragment_students_list">
+        <action
+            android:id="@+id/action_studentsListFragment2_to_newStudentFragment"
+            app:destination="@id/newStudentFragment" />
+        <action
+            android:id="@+id/action_studentsListFragment2_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.lot_pr10_fct.ui.about.AboutFragment"
+        android:label="Acerca de"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/destSettingsFragment"
+        android:name="com.example.lot_pr10_fct.ui.settings.SettingsFragment"
+        android:label="Preferencias"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/studentVisitsListFragment"
+        android:name="com.example.lot_pr10_fct.ui.studentVisitsList.StudentVisitsListFragment"
+        android:label="Visitas de estudiante"
+        tools:layout="@layout/fragment_student_visits_list" />
 
 </navigation>

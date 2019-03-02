@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.preference.EditTextPreference
+        android:key="@string/prefNumDays_key"
+        android:defaultValue="@string/prefNumDays_defaultValue"
+        android:dialogTitle="@string/prefNumDays_title"
+        android:icon="@drawable/ic_av_timer_black_24dp"
+        app:useSimpleSummaryProvider="True"
+        android:title="@string/prefNumDays_title" />
+
+</PreferenceScreen>

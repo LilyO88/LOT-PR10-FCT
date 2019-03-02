@@ -1,13 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_newVisit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.visits.newVisit.NewVisitFragment">
 
+    <!--Alumno-->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/nv_lblStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:selectAllOnFocus="true"
+        android:text="Nombre"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <Spinner
+        android:id="@+id/nv_spStudent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:nextFocusForward="@id/ev_txtDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nv_lblStudent"
+        app:layout_constraintTop_toBottomOf="@+id/nv_lblStudent" />
+
+    <!--Fecha-->
+    <TextView
+        android:id="@+id/nv_lblDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Fecha"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nv_spStudent" />
+
+    <EditText
+        android:id="@+id/nv_txtDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Fecha visita"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLength="11"
+        android:nextFocusForward="@id/nv_txtBegin"
+        app:layout_constraintEnd_toStartOf="@+id/nv_imgDate"
+        app:layout_constraintStart_toStartOf="@+id/nv_lblDate"
+        app:layout_constraintTop_toBottomOf="@+id/nv_lblDate"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/nv_imgDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/color_state_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nv_txtDate"
+        app:srcCompat="@drawable/ic_event_black_24dp" />
+
+    <!--Horario-->
+    <TextView
+        android:id="@+id/nv_lblTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Horario"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nv_txtDate"
+        tools:textSize="14sp" />
+
+    <!--Entrada-->
+    <EditText
+        android:id="@+id/nv_txtBegin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Inicio"
+        android:inputType="time"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/nv_txtEnd"
+        app:layout_constraintEnd_toStartOf="@+id/nv_imgBegin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/nv_lblTime"
+        app:layout_constraintTop_toBottomOf="@+id/nv_lblTime"
+        tools:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/nv_imgBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_access_time_black_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/nv_txtEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nv_txtBegin"
+        app:layout_constraintTop_toTopOf="@+id/nv_txtBegin"
+        tools:ignore="MissingConstraints" />
+
+    <!--Salida-->
+    <EditText
+        android:id="@+id/nv_txtEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Fin"
+        android:inputType="time"
+        android:nextFocusForward="@id/nv_txtObservations"
+        app:layout_constraintEnd_toStartOf="@+id/nv_imgEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nv_imgBegin"
+        app:layout_constraintTop_toBottomOf="@+id/nv_lblTime"
+        tools:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/nv_imgEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_access_time_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nv_txtEnd"
+        app:layout_constraintTop_toTopOf="@+id/nv_txtEnd" />
+
+    <!--Observaciones-->
+    <TextView
+        android:id="@+id/nv_lblObservations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Observaciones"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nv_txtBegin"
+        tools:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/nv_txtObservations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Observaciones"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nv_lblObservations"
+        app:layout_constraintTop_toBottomOf="@+id/nv_lblObservations"
+        tools:textSize="14sp" />
+
+    <!--Guardar-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nv_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:src="@drawable/ic_save_black_24dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

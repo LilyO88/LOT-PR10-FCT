@@ -1,13 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_newStudent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.student.newStudent.NewStudentFragment">
 
+    <!--Nombre-->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/ne_lblName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:selectAllOnFocus="true"
+        android:text="Nombre"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/ne_txtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Nombre del alumno"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:nextFocusForward="@id/ne_txtCurso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblName"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblName"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <!--Curso-->
+    <TextView
+        android:id="@+id/ne_lblCurso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Curso"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ne_txtName" />
+
+    <EditText
+        android:id="@+id/ne_txtCurso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Curso del alumno"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLength="11"
+        android:nextFocusForward="@id/ne_txtEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblCurso"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblCurso"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <!--Email-->
+    <TextView
+        android:id="@+id/ne_lblEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Email del alumno"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ne_txtCurso" />
+
+    <EditText
+        android:id="@+id/ne_txtEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Correo electrónico"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:maxLength="11"
+        android:nextFocusForward="@id/ne_spCompany"
+        app:layout_constraintEnd_toStartOf="@+id/ne_imgEmail"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblEmail"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblEmail"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/ne_imgEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/color_state_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ne_txtEmail"
+        app:srcCompat="@drawable/ic_email_black_24dp" />
+
+    <!--Empresa-->
+    <TextView
+        android:id="@+id/ne_lblCompany"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Empresa"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ne_txtEmail" />
+
+    <Spinner
+        android:id="@+id/ne_spCompany"
+        android:layout_width="387dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:nextFocusForward="@id/ne_txtTutorName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblCompany"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblCompany" />
+
+    <!--Tutor-->
+    <TextView
+        android:id="@+id/ne_lblTutorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Nombre tutor"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ne_spCompany" />
+
+    <EditText
+        android:id="@+id/ne_txtTutorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Nombre del tutor en la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:maxLength="11"
+        android:nextFocusForward="@id/ne_txtTutorTlfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblTutorName"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblTutorName"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <!--Teléfono tutor-->
+    <TextView
+        android:id="@+id/ne_lblTutorTlfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Teléfono tutor"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ne_txtTutorName" />
+
+    <EditText
+        android:id="@+id/ne_txtTutorTlfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="URL del logo de la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:nextFocusForward="@id/ne_imgBegin"
+        app:layout_constraintEnd_toStartOf="@+id/ne_imgTutorTlfo"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblTutorTlfo"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblTutorTlfo"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/ne_imgTutorTlfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_phone_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ne_txtTutorTlfo" />
+
+    <!--Horario-->
+    <TextView
+        android:id="@+id/ne_lblTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Horario"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ne_txtTutorTlfo"
+        tools:textSize="14sp" />
+
+    <!--Entrada-->
+    <EditText
+        android:id="@+id/ne_txtBegin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Entrada"
+        android:inputType="time"
+        app:layout_constraintEnd_toStartOf="@+id/ne_imgBegin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/ne_lblTime"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblTime"
+        tools:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/ne_imgBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:nextFocusForward="@id/ne_imgEnd"
+        android:src="@drawable/ic_access_time_black_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/ne_txtEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ne_txtBegin"
+        app:layout_constraintTop_toTopOf="@+id/ne_txtBegin"
+        tools:ignore="MissingConstraints" />
+
+    <!--Salida-->
+    <EditText
+        android:id="@+id/ne_txtEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Salida"
+        android:inputType="time"
+        app:layout_constraintEnd_toStartOf="@+id/ne_imgEnd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ne_imgBegin"
+        app:layout_constraintTop_toBottomOf="@+id/ne_lblTime"
+        tools:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/ne_imgEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_access_time_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ne_txtEnd"
+        app:layout_constraintTop_toTopOf="@+id/ne_txtEnd" />
+
+    <!--Guardar-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ne_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:src="@drawable/ic_save_black_24dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

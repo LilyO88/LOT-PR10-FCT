@@ -9,15 +9,16 @@
             android:id="@+id/nextVisitsListFragment"
             android:title="Visitas"/>
         <item
-            android:id="@+id/destStudentsListFragment"
-            android:title="Alumnos"/>
+            android:id="@+id/studentsListFragment"
+            android:title="Alumnos" />
         <item
-            android:id="@+id/destCompaniesListFragment"
+            android:id="@+id/companiesListFragment"
             android:title="Empresas"/>
     </group>
-    <group >
+    <group
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/destAboutFragment"
+            android:id="@+id/aboutFragment"
             android:title="Acerca de"/>
     </group>
 </menu>

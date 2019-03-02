@@ -18,9 +18,9 @@ public class EditVisitFragment extends Fragment {
 
     private EditVisitFragmentViewModel mViewModel;
 
-    public static EditVisitFragment newInstance() {
-        return new EditVisitFragment();
-    }
+//    public static EditVisitFragment newInstance() {
+//        return new EditVisitFragment();
+//    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -31,8 +31,7 @@ public class EditVisitFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(EditVisitFragmentViewModel.class);
-        // TODO: Use the ViewModel
+        //mViewModel
     }
 
 }

@@ -1,12 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_newCompany"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.company.newCompany.NewCompanyFragment">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
 
-</FrameLayout>
+    <!--Nombre-->
+    <TextView
+        android:id="@+id/nc_lblName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:selectAllOnFocus="true"
+        android:text="Nombre"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nc_txtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Nombre de la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:nextFocusForward="@id/nc_txtTlfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nc_lblName"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblName"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <!--Teléfono-->
+    <TextView
+        android:id="@+id/nc_lblTlfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Teléfono"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nc_txtName" />
+
+    <EditText
+        android:id="@+id/nc_txtTlfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Tlfo de la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:nextFocusForward="@id/nc_txtCIF"
+        app:layout_constraintEnd_toStartOf="@+id/nc_imgTlfo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/nc_lblTlfo"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblTlfo"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/nc_imgTlfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:tint="@color/color_state_selector"
+        app:layout_constraintEnd_toStartOf="@+id/nc_txtCIF"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nc_txtTlfo"
+        app:layout_constraintTop_toTopOf="@+id/nc_txtTlfo"
+        app:srcCompat="@drawable/ic_phone_black_24dp" />
+
+    <!--CIF-->
+    <TextView
+        android:id="@+id/nc_lblCIF"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="CIF"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="@+id/nc_txtCIF"
+        app:layout_constraintTop_toTopOf="@+id/nc_lblTlfo" />
+
+    <EditText
+        android:id="@+id/nc_txtCIF"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="CIF de la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLength="11"
+        android:nextFocusForward="@id/nc_txtAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nc_imgTlfo"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblCIF"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <!--Dirección-->
+    <TextView
+        android:id="@+id/nc_lblAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Dirección sede principal"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nc_txtTlfo" />
+
+    <EditText
+        android:id="@+id/nc_txtAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Dirección postal"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textPostalAddress"
+        android:maxLength="11"
+        android:nextFocusForward="@id/nc_txtEmail"
+        app:layout_constraintEnd_toStartOf="@+id/nc_imgAddress"
+        app:layout_constraintStart_toStartOf="@+id/nc_lblAddress"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblAddress"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/nc_imgAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/color_state_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nc_txtAddress"
+        app:srcCompat="@drawable/ic_map_black_24dp" />
+
+    <!--Email-->
+    <TextView
+        android:id="@+id/nc_lblEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Email de contacto"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nc_txtAddress" />
+
+    <EditText
+        android:id="@+id/nc_txtEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Correo electrónico"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:maxLength="11"
+        android:nextFocusForward="@id/nc_txtContact"
+        app:layout_constraintEnd_toStartOf="@+id/nc_imgEmail"
+        app:layout_constraintStart_toStartOf="@+id/nc_lblEmail"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblEmail"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/nc_imgEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/color_state_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nc_txtEmail"
+        app:srcCompat="@drawable/ic_email_black_24dp" />
+
+    <!--Contacto-->
+    <TextView
+        android:id="@+id/nc_lblContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Persona de contacto"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nc_txtEmail" />
+
+    <EditText
+        android:id="@+id/nc_txtContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Persona de contacto en la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:maxLength="11"
+        android:nextFocusForward="@id/nc_txtURL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nc_lblContact"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblContact"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <!--URL-->
+    <TextView
+        android:id="@+id/nc_lblURL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="URL logo"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nc_txtContact" />
+
+    <EditText
+        android:id="@+id/nc_txtURL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="URL del logo de la empresa"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textWebEditText"
+        android:maxLength="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nc_lblURL"
+        app:layout_constraintTop_toBottomOf="@+id/nc_lblURL"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nc_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:src="@drawable/ic_save_black_24dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

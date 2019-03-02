@@ -31,8 +31,7 @@ public class NewStudentFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NewStudentFragmentViewModel.class);
-        // TODO: Use the ViewModel
+        //mViewModel
     }
 
 }
