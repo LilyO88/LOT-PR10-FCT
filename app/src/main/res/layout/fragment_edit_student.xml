@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_editStudent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.student.editStudent.EditStudentFragment"
-    android:id="@+id/cl_editStudent">
+    tools:context=".ui.student.editStudent.EditStudentFragment">
 
     <!--Nombre-->
     <TextView
@@ -45,17 +44,17 @@
         android:id="@+id/es_lblCurso"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Curso"
         android:textColor="@color/color_state_selector"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/es_txtCurso"
         app:layout_constraintTop_toBottomOf="@+id/es_txtName" />
 
     <EditText
         android:id="@+id/es_txtCurso"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
@@ -64,13 +63,59 @@
         android:importantForAutofill="no"
         android:inputType="text"
         android:maxLength="11"
-        android:nextFocusForward="@id/es_txtEmail"
+        android:nextFocusForward="@id/es_txtStudentPhone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/es_lblCurso"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/es_imgStudentPhone"
         app:layout_constraintTop_toBottomOf="@+id/es_lblCurso"
         tools:textSize="14sp">
         <!--<requestFocus />-->
     </EditText>
+
+    <!--Tlfo-->
+    <TextView
+        android:id="@+id/es_lblStudentPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Tlfo alumno"
+        android:textColor="@color/color_state_selector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/es_txtName" />
+
+    <EditText
+        android:id="@+id/es_txtStudentPhone"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Tlfo del alumno"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:nextFocusForward="@id/es_txtEmail"
+        app:layout_constraintEnd_toStartOf="@+id/es_imgStudentPhone"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/es_lblStudentPhone"
+        tools:textSize="14sp">
+        <!--<requestFocus />-->
+    </EditText>
+
+    <ImageView
+        android:id="@+id/es_imgStudentPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_phone_black_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/es_txtCurso"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/es_txtStudentPhone"
+        app:layout_constraintTop_toTopOf="@+id/es_txtStudentPhone" />
 
     <!--Email-->
     <TextView
@@ -213,6 +258,7 @@
         app:layout_constraintTop_toTopOf="@+id/es_txtTutorTlfo" />
 
     <!--Horario-->
+
     <TextView
         android:id="@+id/es_lblTime"
         android:layout_width="0dp"
@@ -245,10 +291,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:nextFocusForward="@id/es_imgEnd"
         android:src="@drawable/ic_access_time_black_24dp"
         app:layout_constraintTop_toTopOf="@+id/es_txtBegin"
         tools:ignore="MissingConstraints"
-        android:nextFocusForward="@id/es_imgEnd"
         tools:layout_editor_absoluteX="177dp" />
 
     <!--Salida-->
@@ -265,7 +311,7 @@
         app:layout_constraintEnd_toStartOf="@+id/es_imgEnd"
         app:layout_constraintStart_toEndOf="@+id/es_imgBegin"
         app:layout_constraintTop_toBottomOf="@+id/es_lblTime"
-        tools:textSize="14sp"/>
+        tools:textSize="14sp" />
 
     <ImageView
         android:id="@+id/es_imgEnd"

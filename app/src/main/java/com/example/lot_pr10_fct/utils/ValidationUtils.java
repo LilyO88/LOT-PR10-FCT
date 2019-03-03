@@ -3,6 +3,9 @@ package com.example.lot_pr10_fct.utils;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import java.util.regex.Pattern;
+
+
 // DO NOT TOUCH
 
 public class ValidationUtils {
@@ -22,10 +25,14 @@ public class ValidationUtils {
         return !TextUtils.isEmpty(url) && Patterns.WEB_URL.matcher(url).matches();
     }
 
+    public static boolean isValidCIF(String cif) {
+        final Pattern patron = Pattern.compile("[ABCDEFGHJKLMNPQRSUVW]{1}[0-9]{7}([0-9A-J]{1})");
+        return !TextUtils.isEmpty(cif) && patron.matcher(cif).matches();
+    }
     //Modifications
 
-    public static boolean isValidName(String name) {
-        return !TextUtils.isEmpty(name);
+    public static boolean isValidString(String string) {
+        return !TextUtils.isEmpty(string);
     }
 
     public static boolean isValidAddress(String address) {

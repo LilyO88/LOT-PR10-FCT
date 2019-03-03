@@ -18,7 +18,8 @@
         android:text="Nombre"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+    />
 
     <Spinner
         android:id="@+id/nv_spStudent"
@@ -26,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:nextFocusForward="@id/ev_txtDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/nv_lblStudent"
         app:layout_constraintTop_toBottomOf="@+id/nv_lblStudent" />
@@ -53,9 +53,8 @@
         android:hint="Fecha visita"
         android:imeOptions="actionNext"
         android:importantForAutofill="no"
-        android:inputType="text"
+        android:inputType="date"
         android:maxLength="11"
-        android:nextFocusForward="@id/nv_txtBegin"
         app:layout_constraintEnd_toStartOf="@+id/nv_imgDate"
         app:layout_constraintStart_toStartOf="@+id/nv_lblDate"
         app:layout_constraintTop_toBottomOf="@+id/nv_lblDate"
@@ -98,7 +97,6 @@
         android:hint="Inicio"
         android:inputType="time"
         android:imeOptions="actionNext"
-        android:nextFocusForward="@id/nv_txtEnd"
         app:layout_constraintEnd_toStartOf="@+id/nv_imgBegin"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -129,7 +127,7 @@
         android:ems="10"
         android:hint="Fin"
         android:inputType="time"
-        android:nextFocusForward="@id/nv_txtObservations"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toStartOf="@+id/nv_imgEnd"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/nv_imgBegin"

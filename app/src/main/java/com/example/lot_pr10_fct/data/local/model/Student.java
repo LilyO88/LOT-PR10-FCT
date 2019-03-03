@@ -2,6 +2,7 @@ package com.example.lot_pr10_fct.data.local.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -20,12 +21,12 @@ public class Student {
     private String phone;
     private String email;
     private String grade;
-    private long company;
+    private String company;
     private String tutorName;
     private String tutorPhone;
     private String horary;
 
-    public Student(String name, String phone, String email, String grade, long company, String tutorName, String tutorPhone, String horary) {
+    public Student(String name, String phone, String email, String grade, String company, String tutorName, String tutorPhone, String horary) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -79,11 +80,11 @@ public class Student {
         this.grade = grade;
     }
 
-    public long getCompany() {
+    public String getCompany() {
         return company;
     }
 
-    public void setCompany(long company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 

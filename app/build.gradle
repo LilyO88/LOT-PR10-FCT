@@ -21,11 +21,11 @@ android {
         targetCompatibility = '1.8'
     }
 
-    android {
+/*    android {
         dataBinding {
             enabled = true
         }
-    }
+    }*/
 }
 
 dependencies {

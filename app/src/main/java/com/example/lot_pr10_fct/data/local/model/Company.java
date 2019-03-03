@@ -2,11 +2,15 @@ package com.example.lot_pr10_fct.data.local.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "companies")
+@Entity(tableName = "companies",
+        indices = {@Index(value = {"name"},
+                unique = true)
+        })
 public class Company {
 
     @PrimaryKey(autoGenerate = true)

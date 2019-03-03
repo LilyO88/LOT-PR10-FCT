@@ -9,7 +9,7 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(tableName = "visits",
         foreignKeys = @ForeignKey(
                 entity = Student.class,
-                parentColumns = "name",
+                parentColumns = "id",
                 childColumns = "student",
                 onUpdate = CASCADE,
                 onDelete = CASCADE))
@@ -18,13 +18,15 @@ public class Visit {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long student;
+    private String company;
     private String day;
     private String beginHour;
     private String endHour;
     private String observations;
 
-    public Visit(long student, String day, String beginHour, String endHour, String observations) {
+    public Visit(long student, String company, String day, String beginHour, String endHour, String observations) {
         this.student = student;
+        this.company = company;
         this.day = day;
         this.beginHour = beginHour;
         this.endHour = endHour;
@@ -80,5 +82,13 @@ public class Visit {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

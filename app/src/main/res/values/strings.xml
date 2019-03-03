@@ -5,4 +5,7 @@
     <string name="prefNumDays_key">prefNumDays</string>
     <string name="prefNumDays_defaultValue">15</string>
     <string name="prefNumDays_title">Intervalo de días entre visitas</string>
+    <string name="main_invalid_data">Datos inválidos</string>
+    <string name="main_error_saving">Error al guardar empresa</string>
+    <string name="main_saving">¡Visita guardada con éxito!</string>
 </resources>

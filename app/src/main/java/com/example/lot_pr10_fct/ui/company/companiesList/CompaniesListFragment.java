@@ -30,7 +30,6 @@ public class CompaniesListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        navController = Navigation.findNavController(requireActivity(), R.id.navHostFragment);
         return inflater.inflate(R.layout.fragment_companies_list, container, false);
     }
 
@@ -48,9 +47,4 @@ public class CompaniesListFragment extends Fragment {
         });
     }
 
-//    @Override
-//    public void onDetach() {
-//        navController.popBackStack();
-//        super.onDetach();
-//    }
 }
