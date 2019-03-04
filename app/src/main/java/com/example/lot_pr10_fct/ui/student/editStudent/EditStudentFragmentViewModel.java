@@ -22,7 +22,6 @@ public class EditStudentFragmentViewModel extends ViewModel {
     private boolean stateBeginImg = true;
     private boolean stateEndImg = true;
 
-
     public EditStudentFragmentViewModel(Repository repository) {
         this.repository = repository;
     }

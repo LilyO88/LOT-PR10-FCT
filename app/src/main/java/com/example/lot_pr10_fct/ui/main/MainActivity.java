@@ -10,6 +10,7 @@ import com.example.lot_pr10_fct.ui.about.AboutFragment;
 import com.example.lot_pr10_fct.ui.company.companiesList.CompaniesListFragment;
 import com.example.lot_pr10_fct.ui.student.studentsList.StudentsListFragment;
 import com.example.lot_pr10_fct.ui.visits.nextVisitsList.NextVisitsListFragment;
+import com.example.lot_pr10_fct.utils.KeyboardUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.zip.Inflater;
@@ -48,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = ActivityCompat.requireViewById(this, R.id.drawerLayout);
 
         setupToolbar();
-        //Listener item drawer
-//        navView.setNavigationItemSelectedListener(this);
     }
 
     private void setupToolbar() {
@@ -63,15 +62,13 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(navView, navController);
         NavigationUI.setupWithNavController(toolbar, navController, appbarConfiguration);
-
-        //Si no se pone la siguiente línea no aparece el título la primera vez, pero falla el fragmento principal
-//        NavigationUI.setupActionBarWithNavController(this, navController, appbarConfiguration);
+        //Si no se pone la siguiente línea no aparece el título la primera vez
+        setTitle(R.string.title_first_time);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> toolbar.setTitle(navController.getCurrentDestination().getLabel()));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //Preferences no cierra el drawer
         if(item.getItemId() != R.id.destSettingsFragment) {
             drawerLayout.closeDrawer(drawerLayout);
         }
@@ -86,4 +83,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

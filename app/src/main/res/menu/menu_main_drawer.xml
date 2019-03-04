@@ -10,7 +10,7 @@
             android:title="Visitas"/>
         <item
             android:id="@+id/studentsListFragment"
-            android:title="Alumnos" />
+            android:title="Estudiantes" />
         <item
             android:id="@+id/companiesListFragment"
             android:title="Empresas"/>

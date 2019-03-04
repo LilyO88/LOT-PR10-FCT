@@ -15,9 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:selectAllOnFocus="true"
         android:text="Nombre"
-        android:textStyle="bold"
+        android:textColor="@color/color_state_selector"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +55,7 @@
         android:importantForAutofill="no"
         android:inputType="phone"
         android:maxLength="11"
+        android:focusable="false"
         android:nextFocusForward="@id/ev_txtBegin"
         app:layout_constraintEnd_toStartOf="@+id/ev_imgDate"
         app:layout_constraintStart_toStartOf="@+id/ev_lblDate"
@@ -98,6 +98,7 @@
         android:ems="10"
         android:hint="Inicio"
         android:inputType="time"
+        android:focusable="false"
         app:layout_constraintEnd_toStartOf="@+id/ev_imgBegin"
         app:layout_constraintStart_toStartOf="@+id/ev_lblTime"
         app:layout_constraintTop_toBottomOf="@+id/ev_lblTime"

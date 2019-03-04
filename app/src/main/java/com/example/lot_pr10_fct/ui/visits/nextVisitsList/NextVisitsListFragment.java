@@ -1,5 +1,7 @@
 package com.example.lot_pr10_fct.ui.visits.nextVisitsList;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -15,13 +17,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.lot_pr10_fct.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NextVisitsListFragment extends Fragment {
 
     private NextVisitsListFragmentViewModel mViewModel;
     private NavController navController;
+    private FloatingActionButton fab;
+    private TextView imagen;
 
 
     @Override
@@ -34,8 +40,12 @@ public class NextVisitsListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         navController = NavHostFragment.findNavController(this);
-        //vm
-        requireActivity().findViewById(R.id.nvl_fab).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.newVisitFragment));
+
+        fab = ViewCompat.requireViewById(requireView(), R.id.nvl_fab);
+        fab.setOnClickListener(v -> navController.navigate(R.id.newVisitFragment));
+
+        imagen = ViewCompat.requireViewById(requireView(), R.id.nvl_lblEmptyView);
+        imagen.setOnClickListener(v -> navController.navigate(R.id.newVisitFragment));
     }
 
 

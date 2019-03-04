@@ -1,5 +1,6 @@
 package com.example.lot_pr10_fct.ui.student.studentsList;
 
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -15,13 +16,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.lot_pr10_fct.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class StudentsListFragment extends Fragment {
 
     private StudentsListFragmentViewModel mViewModel;
     private NavController navController;
+    private FloatingActionButton fab;
+    private TextView imagen;
 
     public static StudentsListFragment newInstance() {
         return new StudentsListFragment();
@@ -30,8 +35,6 @@ public class StudentsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        navController = Navigation.findNavController(requireActivity(), R.id.navHostFragment);
-
         return inflater.inflate(R.layout.fragment_students_list, container, false);
     }
 
@@ -40,19 +43,11 @@ public class StudentsListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         navController = NavHostFragment.findNavController(this);
 
-        //mViewModel
-        requireActivity().findViewById(R.id.sl_fab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.newStudentFragment);
-            }
-        });
-    }
+        fab = ViewCompat.requireViewById(requireView(), R.id.sl_fab);
+        fab.setOnClickListener(v -> navController.navigate(R.id.newVisitFragment));
 
-//    @Override
-//    public void onDetach() {
-//        navController.popBackStack();
-//        super.onDetach();
-//    }
+        imagen = ViewCompat.requireViewById(requireView(), R.id.sl_lblEmptyView);
+        imagen.setOnClickListener(v -> navController.navigate(R.id.newVisitFragment));
+    }
 
 }

@@ -235,22 +235,11 @@ public class NewStudentFragment extends Fragment {
             }
         }, hour, minute, true);
         mTimePicker.show();
-        /*mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if(editText.getId() == txtEnd.getId() || editText.getId() == imgEnd.getId()) {
-                    if(TextUtils.isEmpty(txtBegin.getText().toString())) {
-                        enabledDisabledFieldImg(lblTime, txtBegin, imgBegin, false, "Introducir hora inicio");
-                    }
-                }
-                KeyboardUtils.hideSoftKeyboard(requireActivity());
-            }
-        });*/
     }
 
     private void save() {
         if (!validateAll()) {
-            Snackbar.make(requireView(), R.string.main_error_saving, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(requireView(), R.string.main_error_saving_student, Snackbar.LENGTH_LONG).show();
         } else {
 //            if(getArguments() != null) {
 //                database.editUser(toEditUser);
@@ -360,5 +349,11 @@ public class NewStudentFragment extends Fragment {
         String phone = editText.getText().toString();
         Intent callPhoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse(String.format("tel:%s", phone)));
         startActivity(callPhoneIntent);
+    }
+
+    @Override
+    public void onDetach() {
+        KeyboardUtils.hideSoftKeyboard(requireActivity());
+        super.onDetach();
     }
 }

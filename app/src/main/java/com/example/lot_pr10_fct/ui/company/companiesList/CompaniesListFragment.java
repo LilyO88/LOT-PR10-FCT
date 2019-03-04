@@ -1,5 +1,6 @@
 package com.example.lot_pr10_fct.ui.company.companiesList;
 
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -15,13 +16,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.lot_pr10_fct.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CompaniesListFragment extends Fragment {
 
     private CompaniesListFragmentViewModel mViewModel;
     NavController navController;
+    private FloatingActionButton fab;
+    private TextView imagen;
 
     public static CompaniesListFragment newInstance() {
         return new CompaniesListFragment();
@@ -38,13 +43,11 @@ public class CompaniesListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         navController = NavHostFragment.findNavController(this);
 
-        //mViewModel
-        requireActivity().findViewById(R.id.cl_fab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.newCompanyFragment);
-            }
-        });
+        fab = ViewCompat.requireViewById(requireView(), R.id.cl_fab);
+        fab.setOnClickListener(v -> navController.navigate(R.id.newVisitFragment));
+
+        imagen = ViewCompat.requireViewById(requireView(), R.id.cl_lblEmptyView);
+        imagen.setOnClickListener(v -> navController.navigate(R.id.newVisitFragment));
     }
 
 }

@@ -20,6 +20,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -244,17 +245,6 @@ public class NewVisitFragment extends Fragment {
             }
         }, hour, minute, true);
         mTimePicker.show();
-        /*mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if(editText.getId() == txtEnd.getId() || editText.getId() == imgEnd.getId()) {
-                    if(TextUtils.isEmpty(txtBegin.getText().toString())) {
-                        enabledDisabledFieldImg(lblTime, txtBegin, imgBegin, false, "Introducir hora inicio");
-                    }
-                }
-                KeyboardUtils.hideSoftKeyboard(requireActivity());
-            }
-        });*/
     }
 
     private void save() {
@@ -297,17 +287,7 @@ public class NewVisitFragment extends Fragment {
         if(valid) {
             editText.setError(null);
         } else {
-/*            if(error != null) {
-                editText.setError(error);
-            } else {*/
-                editText.setError(getString(R.string.main_invalid_data));
-//            }
-/*            if(editText.getId() == txtEnd.getId()) {
-                if(!TextUtils.isEmpty(txtBegin.getText().toString()) && !TextUtils.isEmpty(txtEnd.getText().toString())) {
-                    Date begin = new Date(2019, 01, 01, Integer.parseInt(txtBegin.getText().toString().substring(0, 2)), Integer.parseInt(editText.getText().toString().substring(-2)));
-                    Date end = new Date(2019, 01, 01, Integer.parseInt(txtEnd.getText().toString().substring(0, 2)), Integer.parseInt(editText.getText().toString().substring(-2)));
-                }
-            }*/
+            editText.setError(getString(R.string.main_invalid_data));
         }
         imageView.setEnabled(valid);
         textView.setEnabled(valid);
@@ -357,4 +337,9 @@ public class NewVisitFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onDetach() {
+        KeyboardUtils.hideSoftKeyboard(requireActivity());
+        super.onDetach();
+    }
 }

@@ -308,4 +308,10 @@ public class NewCompanyFragment extends Fragment {
         Intent searchAddressIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("geo:0,0?q=%s", address)));
         startActivity(searchAddressIntent);
     }
+
+    @Override
+    public void onDetach() {
+        KeyboardUtils.hideSoftKeyboard(requireActivity());
+        super.onDetach();
+    }
 }
