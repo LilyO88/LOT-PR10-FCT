@@ -29,7 +29,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public MainActivityViewModel(@NonNull Application application, Repository repository) {
         super(application);
-        
+
         interval = new SharedPreferencesStringLiveData(
                 PreferenceManager.getDefaultSharedPreferences(application),
                 application.getString(R.string.prefNumDays_key),

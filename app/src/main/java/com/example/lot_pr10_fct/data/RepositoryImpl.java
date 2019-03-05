@@ -1,5 +1,7 @@
 package com.example.lot_pr10_fct.data;
 
+import android.os.AsyncTask;
+
 import com.example.lot_pr10_fct.data.local.CompanyDao;
 import com.example.lot_pr10_fct.data.local.StudentDao;
 import com.example.lot_pr10_fct.data.local.VisitDao;
@@ -26,83 +28,83 @@ public class RepositoryImpl implements Repository {
     //Visit
     @Override
     public LiveData<List<Visit>> queryVisits() {
-        return null;
+        return visitDao.queryVisits();
     }
 
     @Override
     public LiveData<List<Visit>> queryStudentVisits(long studentId) {
-        return null;
+        return visitDao.queryStudentVisits(studentId);
     }
 
     @Override
     public LiveData<Visit> queryVisit(long visitId) {
-        return null;
+        return visitDao.queryVisit(visitId);
     }
 
     @Override
     public void insertVisit(Visit visit) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> visitDao.insert(visit));
     }
 
     @Override
     public void updateVisit(Visit visit) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> visitDao.update(visit));
     }
 
     @Override
     public void deleteVisit(Visit visit) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> visitDao.delete(visit));
     }
 
     //Student
     @Override
     public LiveData<List<Student>> queryStudents() {
-        return null;
+        return studentDao.queryStudents();
     }
 
     @Override
     public LiveData<Student> queryStudent(long studentId) {
-        return null;
+        return studentDao.queryStudent(studentId);
     }
 
     @Override
     public void insertStudent(Student student) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> studentDao.insert(student));
     }
 
     @Override
     public void updateStudent(Student student) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> studentDao.update(student));
     }
 
     @Override
     public void deleteStudent(Student student) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> studentDao.delete(student));
     }
 
     //Company
     @Override
     public LiveData<Company> queryCompany(long companyId) {
-        return null;
+        return companyDao.queryCompany(companyId);
     }
 
     @Override
     public LiveData<List<Company>> queryCompanies() {
-        return null;
+        return companyDao.queryCompanies();
     }
 
     @Override
     public void insertCompany(Company company) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> companyDao.insert(company));
     }
 
     @Override
     public void updateCompany(Company company) {
-
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> companyDao.update(company));
     }
 
     @Override
-    public void deleteSCompany(Company company) {
-
+    public void deleteCompany(Company company) {
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> companyDao.delete(company));
     }
 }

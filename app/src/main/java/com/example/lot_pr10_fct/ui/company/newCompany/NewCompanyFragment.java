@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.lot_pr10_fct.R;
 import com.example.lot_pr10_fct.data.RepositoryImpl;
 import com.example.lot_pr10_fct.data.local.AppDatabase;
+import com.example.lot_pr10_fct.data.local.model.Company;
 import com.example.lot_pr10_fct.ui.company.editCompany.EditCompanyFragment;
 import com.example.lot_pr10_fct.utils.KeyboardUtils;
 import com.example.lot_pr10_fct.utils.ValidationUtils;
@@ -199,12 +200,15 @@ public class NewCompanyFragment extends Fragment {
         if (!validateAll()) {
             Snackbar.make(requireView(), R.string.main_error_saving, Snackbar.LENGTH_LONG).show();
         } else {
-//            if(getArguments() != null) {
-//                database.editUser(toEditUser);
-//            } else {
-//                database.addUser(toEditUser);
-//            }
-            navController.navigate(R.id.companiesListFragment);
+            Company company = new Company(txtName.getText().toString(),
+                    txtTlfo.getText().toString(),
+                    txtCif.getText().toString(),
+                    txtAddress.getText().toString(),
+                    txtEmail.getText().toString(),
+                    txtContact.getText().toString());
+            viewModel.insert(company);
+            getFragmentManager().popBackStack();
+//            navController.navigate(R.id.companiesListFragment);
         }
         KeyboardUtils.hideSoftKeyboard(requireActivity());
     }

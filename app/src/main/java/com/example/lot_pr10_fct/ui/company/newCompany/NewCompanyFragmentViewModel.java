@@ -1,6 +1,7 @@
 package com.example.lot_pr10_fct.ui.company.newCompany;
 
 import com.example.lot_pr10_fct.data.Repository;
+import com.example.lot_pr10_fct.data.local.model.Company;
 
 import androidx.lifecycle.ViewModel;
 
@@ -101,5 +102,9 @@ public class NewCompanyFragmentViewModel extends ViewModel {
 
     public void setStateEmailImg(boolean stateEmailImg) {
         this.stateEmailImg = stateEmailImg;
+    }
+
+    public void insert(Company company) {
+        repository.insertCompany(company);
     }
 }

@@ -31,9 +31,10 @@ public class NextVisitsListFragmentAdapter extends ListAdapter<Visit, NextVisits
             public boolean areContentsTheSame(@NonNull Visit oldItem, @NonNull Visit newItem) {
 //                return TextUtils.equals(oldItem.getStudent(), newItem.getStudent())
                 return oldItem.getStudent() == newItem.getStudent()
-                        && TextUtils.equals(oldItem.getDay(), newItem.getDay())
-                        && TextUtils.equals(oldItem.getBeginHour(), newItem.getBeginHour())
-                        && TextUtils.equals(oldItem.getEndHour(), newItem.getEndHour())
+//                        && TextUtils.equals(oldItem.getDay(), newItem.getDay())
+//                        && TextUtils.equals(oldItem.getBeginHour(), newItem.getBeginHour())
+//                        && TextUtils.equals(oldItem.getEndHour(), newItem.getEndHour())
+                        && oldItem.getDate().equals(newItem.getDate())
                         && TextUtils.equals(oldItem.getObservations(), newItem.getObservations());
             }
         });
@@ -97,7 +98,7 @@ public class NextVisitsListFragmentAdapter extends ListAdapter<Visit, NextVisits
                 next = "¡Visitar cuanto antes!";
             }
 
-            name.setText(Long.toString(visit.getStudent()));
+//            name.setText(Long.toString(visit.getStudent()));
             company.setText(visit.getCompany());
             nextVisit.setText(next);
         }
