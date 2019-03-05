@@ -38,7 +38,9 @@ public class StudentsListFragmentAdapter extends ListAdapter<Student, StudentsLi
                         && oldItem.getCompany() == newItem.getCompany()
                         && TextUtils.equals(oldItem.getTutorName(), newItem.getTutorName())
                         && TextUtils.equals(oldItem.getTutorPhone(), newItem.getTutorPhone())
-                        && TextUtils.equals(oldItem.getHorary(), newItem.getHorary());
+//                        && TextUtils.equals(oldItem.getHorary(), newItem.getHorary());
+                        && oldItem.getBegin().equals(newItem.getBegin())
+                        && oldItem.getEnd().equals(newItem.getEnd());
             }
         });
 

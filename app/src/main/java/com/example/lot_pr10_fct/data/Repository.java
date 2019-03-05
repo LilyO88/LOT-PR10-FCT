@@ -30,5 +30,5 @@ public interface Repository {
     LiveData<List<Company>> queryCompanies();
     void insertCompany(Company company);
     void updateCompany(Company company);
-    void deleteSCompany(Company company);
+    void deleteCompany(Company company);
 }

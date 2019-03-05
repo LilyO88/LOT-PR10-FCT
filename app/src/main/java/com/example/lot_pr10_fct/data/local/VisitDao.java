@@ -12,10 +12,14 @@ import androidx.room.Query;
 @Dao
 public interface VisitDao extends BaseDao<Visit> {
 
-//    LiveData<List<Visit>> queryVisits();
-//    LiveData<List<Visit>> queryStudentVisits(long studentId);
-//    LiveData<Visit> queryVisit(long visitId);
-//    void insertVisit(Visit visit);
-//    void updateVisit(Visit visit);
-//    void deleteVisit(Visit visit);
+    @Query("SELECT * FROM visits as T1 WHERE " +
+            "NOT EXISTS(SELECT * FROM visits AS T2 " +
+            "WHERE T1.idStudent = T2.idStudent AND T1.date < T2.date)")
+    LiveData<List<Visit>> queryVisits();
+
+    @Query("SELECT * FROM visits WHERE idStudent = :studentId")
+    LiveData<List<Visit>> queryStudentVisits(long studentId);
+
+    @Query("SELECT * FROM visits WHERE id = :visitId")
+    LiveData<Visit> queryVisit(long visitId);
 }

@@ -32,9 +32,10 @@ public class StudentVisitsListFragmentAdapter extends ListAdapter<Visit, Student
             public boolean areContentsTheSame(@NonNull Visit oldItem, @NonNull Visit newItem) {
 //                return TextUtils.equals(oldItem.getStudent(), newItem.getStudent())
                 return oldItem.getStudent() == newItem.getStudent()
-                        && TextUtils.equals(oldItem.getDay(), newItem.getDay())
-                        && TextUtils.equals(oldItem.getBeginHour(), newItem.getBeginHour())
-                        && TextUtils.equals(oldItem.getEndHour(), newItem.getEndHour())
+//                        && TextUtils.equals(oldItem.getDay(), newItem.getDay())
+//                        && TextUtils.equals(oldItem.getBeginHour(), newItem.getBeginHour())
+//                        && TextUtils.equals(oldItem.getEndHour(), newItem.getEndHour())
+                        && oldItem.getDate().equals(newItem.getDate())
                         && TextUtils.equals(oldItem.getObservations(), newItem.getObservations());
             }
         });
@@ -86,9 +87,9 @@ public class StudentVisitsListFragmentAdapter extends ListAdapter<Visit, Student
         }
 
         public void bind(Visit visit) {
-            name.setText(Long.toString(visit.getStudent()));
-            company.setText(visit.getCompany());
-            date.setText(visit.getDay() + " de " + visit.getBeginHour() + " a " + visit.getEndHour());
+//            name.setText(Long.toString(visit.getStudent()));
+//            company.setText(visit.getCompany());
+//            date.setText(visit.getDay() + " de " + visit.getBeginHour() + " a " + visit.getEndHour());
 
         }
     }

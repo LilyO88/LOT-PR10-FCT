@@ -3,14 +3,17 @@ package com.example.lot_pr10_fct.data.local;
 import android.content.Context;
 
 import com.example.lot_pr10_fct.data.local.model.Company;
+import com.example.lot_pr10_fct.data.local.model.Converters;
 import com.example.lot_pr10_fct.data.local.model.Student;
 import com.example.lot_pr10_fct.data.local.model.Visit;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 @Database(entities = {Visit.class, Student.class, Company.class}, version = 1, exportSchema = false)
+@TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "practices";
