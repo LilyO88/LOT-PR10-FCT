@@ -4,40 +4,49 @@ import java.util.Date;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import static androidx.room.ForeignKey.CASCADE;
+import static androidx.room.ForeignKey.NO_ACTION;
 
 @Entity(tableName = "visits",
-        foreignKeys = {@ForeignKey(
-                entity = Student.class,
-                parentColumns = "name",
-                childColumns = "student",
-                onUpdate = CASCADE,
-                onDelete = CASCADE),
+        foreignKeys = {@ForeignKey(entity = Student.class,
+                        parentColumns = "name",
+                        childColumns = "student",
+                        onUpdate = NO_ACTION,
+                        onDelete = NO_ACTION),
                 @ForeignKey(entity = Student.class,
-                parentColumns = "id",
-                childColumns = "idStudent",
-                onUpdate = CASCADE,
-                onDelete = CASCADE)})
+                        parentColumns = "id",
+                        childColumns = "idStudent",
+                        onUpdate = NO_ACTION,
+                        onDelete = NO_ACTION),
+                @ForeignKey(entity = Student.class,
+                        parentColumns = "company",
+                        childColumns = "companyStudent",
+                        onUpdate = NO_ACTION,
+                        onDelete = NO_ACTION)},
+        indices = {@Index(value = {"idStudent"}),
+                @Index(value = {"student"}),
+                @Index(value = {"companyStudent"})})
 public class Visit {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long idStudent;
     private String student;
-    private String company;
+    private String companyStudent;
     private Date date;
 //    private String day;
 //    private String beginHour;
 //    private String endHour;
     private String observations;
 
-    public Visit(long idStudent, String student, String company, Date date, /*String day, String beginHour, String endHour,*/ String observations) {
+    public Visit(long idStudent, String student, String companyStudent, Date date, /*String day, String beginHour, String endHour,*/ String observations) {
         this.idStudent = idStudent;
         this.student = student;
-        this.company = company;
+        this.companyStudent = companyStudent;
         this.date = date;
 //        this.day = day;
 //        this.beginHour = beginHour;
@@ -96,12 +105,12 @@ public class Visit {
         this.observations = observations;
     }
 
-    public String getCompany() {
-        return company;
+    public String getCompanyStudent() {
+        return companyStudent;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setCompanyStudent(String companyStudent) {
+        this.companyStudent = companyStudent;
     }
 
     public Date getDate() {

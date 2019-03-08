@@ -2,6 +2,7 @@ package com.example.lot_pr10_fct.data.local.model;
 
 import java.util.Date;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -17,13 +18,10 @@ import static androidx.room.ForeignKey.NO_ACTION;
                         parentColumns = "name",
                         childColumns = "company",
                         onUpdate = NO_ACTION,
-                        onDelete = NO_ACTION),
-                    @ForeignKey(entity = Company.class,
-                        parentColumns = "id",
-                        childColumns = "idCompany",
-                        onUpdate = NO_ACTION,
                         onDelete = NO_ACTION)},
-        indices = {@Index(value = {"name"}, unique = true)})
+        indices = {@Index(value = {"name"}, unique = true),
+                @Index(value = {"company"}, unique = true),
+                @Index(value = {"id"}, unique = true)})
 public class Student {
 
     @PrimaryKey(autoGenerate = true)
@@ -32,7 +30,6 @@ public class Student {
     private String phone;
     private String email;
     private String grade;
-    private long idCompany;
     private String company;
     private String tutorName;
     private String tutorPhone;
@@ -40,12 +37,11 @@ public class Student {
     private Date end;
 //    private String horary;
 
-    public Student(String name, String phone, String email, String grade, long idCompany, String company, String tutorName, String tutorPhone /*String horary*/, Date begin, Date end) {
+    public Student(String name, String phone, String email, String grade, String company, String tutorName, String tutorPhone /*String horary*/, Date begin, Date end) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.grade = grade;
-        this.idCompany = idCompany;
         this.company = company;
         this.tutorName = tutorName;
         this.tutorPhone = tutorPhone;
@@ -55,6 +51,19 @@ public class Student {
     }
 
     public Student() {
+    }
+
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj instanceof Student && id == ((Student)obj).id && name.equals(((Student)obj).name)
+                && phone.equals(((Student)obj).phone) && grade.equals(((Student)obj).grade)
+                && company.equals(((Student)obj).company)
+                && tutorName.equals(((Student)obj).tutorName) && tutorPhone.equals(((Student)obj).tutorPhone)
+                && begin.equals(((Student)obj).begin)&& end.equals(((Student)obj).end)) {
+            return true;
+        }
+        return false;
     }
 
     public long getId() {
@@ -128,14 +137,6 @@ public class Student {
     public void setHorary(String horary) {
         this.horary = horary;
     }*/
-
-    public long getIdCompany() {
-        return idCompany;
-    }
-
-    public void setIdCompany(long idCompany) {
-        this.idCompany = idCompany;
-    }
 
     public Date getBegin() {
         return begin;

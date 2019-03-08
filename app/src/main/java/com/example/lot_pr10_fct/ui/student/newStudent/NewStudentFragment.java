@@ -3,10 +3,12 @@ package com.example.lot_pr10_fct.ui.student.newStudent;
 import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.annotation.TargetApi;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -29,12 +32,19 @@ import android.widget.TimePicker;
 import com.example.lot_pr10_fct.R;
 import com.example.lot_pr10_fct.data.RepositoryImpl;
 import com.example.lot_pr10_fct.data.local.AppDatabase;
+import com.example.lot_pr10_fct.data.local.model.Company;
+import com.example.lot_pr10_fct.data.local.model.Student;
 import com.example.lot_pr10_fct.utils.KeyboardUtils;
 import com.example.lot_pr10_fct.utils.ValidationUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 public class NewStudentFragment extends Fragment {
 
@@ -53,7 +63,7 @@ public class NewStudentFragment extends Fragment {
     private TextView lblGrade;
     private TextView lblStudentPhone;
     private TextView lblEmail;
-    private TextView lblCompany;
+//    private TextView lblCompany;
     private TextView lblTutorName;
     private TextView lblTutorPhone;
     private TextView lblTime;
@@ -67,8 +77,18 @@ public class NewStudentFragment extends Fragment {
 
     NavController navController;
 
+    private long studentId;
+    private boolean editMode;
+
     public static NewStudentFragment newInstance() {
         return new NewStudentFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Objects.requireNonNull(getArguments());
+        studentId = getArguments().getLong("STUDENT_ID");
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -86,7 +106,30 @@ public class NewStudentFragment extends Fragment {
                 , AppDatabase.getInstance(requireContext().getApplicationContext()).companyDao())))
                 .get(NewStudentFragmentViewModel.class);
         setupViews();
-        validateFields();
+//        validateFields();
+
+        if(studentId != 0) {
+            editMode = true;
+            viewModel.getStudent(studentId).observe(getViewLifecycleOwner(), student -> {
+                showStudent(student);
+            });
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private void showStudent(Student student) {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        int positionSpinnerCompany = spCompany.getSelectedItemPosition();
+        viewModel.setStudentCompare(student);
+        txtName.setText(student.getName());
+        txtStudentPhone.setText(student.getPhone());
+        txtGrade.setText(student.getGrade());
+        txtEmail.setText(student.getEmail());
+        spCompany.setSelection(positionSpinnerCompany);
+        txtTutorName.setText(student.getTutorName());
+        txtTutorPhone.setText(student.getTutorPhone());
+        txtBegin.setText(formatter.format(student.getBegin().getTime()));
+        txtEnd.setText(formatter.format(student.getEnd()));
     }
 
     private void setupViews() {
@@ -104,7 +147,7 @@ public class NewStudentFragment extends Fragment {
         lblGrade = ViewCompat.requireViewById(requireView(), R.id.ne_lblCurso);
         lblStudentPhone = ViewCompat.requireViewById(requireView(), R.id.ne_lblStudentPhone);
         lblEmail = ViewCompat.requireViewById(requireView(), R.id.ne_lblEmail);
-        lblCompany = ViewCompat.requireViewById(requireView(), R.id.ne_lblCompany);
+//        lblCompany = ViewCompat.requireViewById(requireView(), R.id.ne_lblCompany);
         lblTutorName = ViewCompat.requireViewById(requireView(), R.id.ne_lblTutorName);
         lblTutorPhone = ViewCompat.requireViewById(requireView(), R.id.ne_lblTutorTlfo);
         lblTime = ViewCompat.requireViewById(requireView(), R.id.ne_lblTime);
@@ -119,6 +162,7 @@ public class NewStudentFragment extends Fragment {
 
         navController = NavHostFragment.findNavController(this);
 
+        setupSpinner();
         setFocusListeners();
 
         //TextWatcher, check fields
@@ -126,6 +170,21 @@ public class NewStudentFragment extends Fragment {
         setTextWatcher(gestorTextWatcher);
 
         setListeners();
+    }
+
+    private void setupSpinner() {
+        viewModel.getCompanies().observe(getViewLifecycleOwner(), companies -> {
+            ArrayList<String> listArraySpinner = new ArrayList<>();
+            for (Company company: companies) {
+                listArraySpinner.add(company.getName());
+            }
+            String[] arraySpinner = new String[listArraySpinner.size()];
+            listArraySpinner.toArray(arraySpinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity(),
+                    android.R.layout.simple_spinner_item, arraySpinner);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spCompany.setAdapter(adapter);
+        });
     }
 
     private void validateFields() {
@@ -216,7 +275,6 @@ public class NewStudentFragment extends Fragment {
         imgStudentPhone.setOnClickListener(v -> callPhone(txtStudentPhone));
         imgEmail.setOnClickListener(v -> sendEmail());
         imgTutorPhone.setOnClickListener(v -> callPhone(txtTutorPhone));
-        //Faltan dialogs time
         imgBegin.setOnClickListener(v -> showTimeDialogPicker(txtBegin));
         imgEnd.setOnClickListener(v -> showTimeDialogPicker(txtEnd));
 
@@ -241,12 +299,33 @@ public class NewStudentFragment extends Fragment {
         if (!validateAll()) {
             Snackbar.make(requireView(), R.string.main_error_saving_student, Snackbar.LENGTH_LONG).show();
         } else {
-//            if(getArguments() != null) {
-//                database.editUser(toEditUser);
-//            } else {
-//                database.addUser(toEditUser);
-//            }
-            navController.navigate(R.id.nextVisitsListFragment);
+            Date now = new Date();
+            Date dateBegin = new Date(now.getYear(), now.getMonth(), now.getDay(), Integer.parseInt(txtBegin.getText().toString().substring(0,2)), Integer.parseInt(txtBegin.getText().toString().substring(3)));
+            Date dateEnd = new Date(now.getYear(), now.getMonth(), now.getDay(), Integer.parseInt(txtEnd.getText().toString().substring(0,2)), Integer.parseInt(txtEnd.getText().toString().substring(3)));
+
+            Student student = new Student(txtName.getText().toString(),
+                txtStudentPhone.getText().toString(),
+                txtEmail.getText().toString(),
+                txtGrade.getText().toString(),
+                spCompany.getSelectedItem().toString(),
+                txtTutorName.getText().toString(),
+                txtTutorPhone.getText().toString(),
+                    dateBegin,
+                    dateEnd);
+            if(editMode) {
+                student.setId(studentId);
+                if(student.equals(viewModel.getStudentCompare())){
+                    Snackbar.make(requireView(), "No ha habido cambios", Snackbar.LENGTH_LONG).show();
+                } else {
+                    viewModel.update(student);
+                    Snackbar.make(requireView(), "¡Estudiante modificado con éxito!", Snackbar.LENGTH_LONG).show();
+                }
+            } else {
+                viewModel.insert(student);
+                Snackbar.make(requireView(), "¡Estudiante guardado con éxito!", Snackbar.LENGTH_LONG).show();
+            }
+
+            getFragmentManager().popBackStack();
         }
         KeyboardUtils.hideSoftKeyboard(requireActivity());
     }
@@ -267,10 +346,6 @@ public class NewStudentFragment extends Fragment {
         enabledDisabledFieldImg(textView, editText, imageView, ValidationUtils.isValidEmail(editText.getText().toString()));
     }
 
-    private void checkCif(TextView textView, EditText editText) {
-        enabledDisabledField(textView, editText, ValidationUtils.isValidCIF(editText.getText().toString()));
-    }
-
     private void checkAll() {
         checkString(lblName, txtName);
         checkString(lblGrade, txtGrade);
@@ -278,8 +353,8 @@ public class NewStudentFragment extends Fragment {
         checkEmail(lblEmail, txtEmail, imgEmail);
         checkString(lblTutorName, txtTutorName);
         checkPhone(lblTutorPhone, txtTutorPhone, imgTutorPhone);
-        //FALTAAAAAAAAAAAAAAA
-//        checkTime();
+        checkStringImg(lblTime, txtBegin, imgBegin);
+        checkStringImg(lblTime, txtEnd, imgEnd);
     }
 
     private void enabledDisabledFieldImg(TextView textView, EditText editText, ImageView imageView, boolean valid) {
@@ -329,7 +404,7 @@ public class NewStudentFragment extends Fragment {
     }
 
     private boolean validateAll() {
-        checkAll();             //FALTA SPINNER LABEL
+        checkAll();
         View[] array = new View[]{lblName, lblGrade, lblStudentPhone, lblEmail, lblTutorName, lblTutorPhone, lblTime};
         for (View view: array) {
             if(!view.isEnabled()) {

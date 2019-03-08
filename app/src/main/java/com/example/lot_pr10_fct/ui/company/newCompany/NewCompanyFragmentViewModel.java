@@ -3,6 +3,7 @@ package com.example.lot_pr10_fct.ui.company.newCompany;
 import com.example.lot_pr10_fct.data.Repository;
 import com.example.lot_pr10_fct.data.local.model.Company;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 public class NewCompanyFragmentViewModel extends ViewModel {
@@ -18,7 +19,25 @@ public class NewCompanyFragmentViewModel extends ViewModel {
     private boolean stateEmail = true;
     private boolean stateEmailImg = true;
     private boolean stateContact = true;
-//    private boolean stateUrl = true;
+    private boolean stateUrl = true;
+
+    private LiveData<Company> companyLiveData;
+    private Company companyCompare;
+
+    public Company getCompanyCompare() {
+        return companyCompare;
+    }
+
+    public void setCompanyCompare(Company companyCompare) {
+        this.companyCompare = companyCompare;
+    }
+
+    LiveData<Company> getCompany(long companyId) {
+        if (companyLiveData == null) {
+            companyLiveData = repository.queryCompany(companyId);
+        }
+        return companyLiveData;
+    }
 
     public NewCompanyFragmentViewModel(Repository repository) {
         this.repository = repository;
@@ -72,13 +91,13 @@ public class NewCompanyFragmentViewModel extends ViewModel {
         this.stateContact = stateContact;
     }
 
-/*    public boolean isStateUrl() {
+    public boolean isStateUrl() {
         return stateUrl;
     }
 
     public void setStateUrl(boolean stateUrl) {
         this.stateUrl = stateUrl;
-    }*/
+    }
 
     public boolean isStatePhoneImg() {
         return statePhoneImg;
@@ -106,5 +125,9 @@ public class NewCompanyFragmentViewModel extends ViewModel {
 
     public void insert(Company company) {
         repository.insertCompany(company);
+    }
+
+    public void update(Company company) {
+        repository.updateCompany(company);
     }
 }

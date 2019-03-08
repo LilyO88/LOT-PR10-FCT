@@ -1,5 +1,7 @@
 package com.example.lot_pr10_fct.ui.student.studentsList;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,6 @@ import android.widget.TextView;
 import com.example.lot_pr10_fct.R;
 import com.example.lot_pr10_fct.data.local.model.Student;
 
-import org.w3c.dom.Text;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
@@ -20,9 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class StudentsListFragmentAdapter extends ListAdapter<Student, StudentsListFragmentAdapter.ViewHolder> {
 
-    private NavController navController;
+    private final NavController navController;
+    private final Context context;
 
-    protected StudentsListFragmentAdapter(NavController navController) {
+    protected StudentsListFragmentAdapter(NavController navController, Context context) {
         super(new DiffUtil.ItemCallback<Student>() {
             @Override
             public boolean areItemsTheSame(@NonNull Student oldItem, @NonNull Student newItem) {
@@ -35,7 +37,7 @@ public class StudentsListFragmentAdapter extends ListAdapter<Student, StudentsLi
                         && TextUtils.equals(oldItem.getPhone(), newItem.getPhone())
                         && TextUtils.equals(oldItem.getEmail(), newItem.getEmail())
                         && TextUtils.equals(oldItem.getGrade(), newItem.getGrade())
-                        && oldItem.getCompany() == newItem.getCompany()
+                        && TextUtils.equals(oldItem.getCompany(), newItem.getCompany())
                         && TextUtils.equals(oldItem.getTutorName(), newItem.getTutorName())
                         && TextUtils.equals(oldItem.getTutorPhone(), newItem.getTutorPhone())
 //                        && TextUtils.equals(oldItem.getHorary(), newItem.getHorary());
@@ -45,13 +47,14 @@ public class StudentsListFragmentAdapter extends ListAdapter<Student, StudentsLi
         });
 
         this.navController = navController;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_studentslist_item, parent, false), navController);    }
+                .inflate(R.layout.fragment_studentslist_item, parent, false), navController, context);    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -80,13 +83,14 @@ public class StudentsListFragmentAdapter extends ListAdapter<Student, StudentsLi
         private TextView tutor;
         private TextView tutorPhone;
 
-        public ViewHolder(@NonNull View itemView, NavController navController) {
+        public ViewHolder(@NonNull View itemView, NavController navController, Context context) {
             super(itemView);
             requireViews();
 
             itemView.setOnClickListener(v -> {
-                //LD<long> getAdapterPosition();
-                navController.navigate(R.id.editStudentFragment);
+                Bundle bundle = new Bundle();
+                bundle.putLong("STUDENT_ID", getItem(getAdapterPosition()).getId());
+                navController.navigate(R.id.action_studentsListFragment_to_newStudentFragment, bundle);
             });
         }
 

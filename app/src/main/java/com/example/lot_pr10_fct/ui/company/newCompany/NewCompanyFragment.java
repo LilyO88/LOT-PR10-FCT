@@ -19,6 +19,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,11 +28,13 @@ import com.example.lot_pr10_fct.R;
 import com.example.lot_pr10_fct.data.RepositoryImpl;
 import com.example.lot_pr10_fct.data.local.AppDatabase;
 import com.example.lot_pr10_fct.data.local.model.Company;
-import com.example.lot_pr10_fct.ui.company.editCompany.EditCompanyFragment;
 import com.example.lot_pr10_fct.utils.KeyboardUtils;
 import com.example.lot_pr10_fct.utils.ValidationUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class NewCompanyFragment extends Fragment {
 
@@ -42,14 +45,15 @@ public class NewCompanyFragment extends Fragment {
     private EditText txtAddress;
     private EditText txtEmail;
     private EditText txtContact;
-    //private EditText url;
+    private EditText txtUrl;
     private TextView lblName;
     private TextView lblTlfo;
     private TextView lblCif;
     private TextView lblAddress;
     private TextView lblEmail;
     private TextView lblContact;
-//    private TextView lblUrl;
+    private TextView lblUrl;
+
 
     private ImageView imgPhone;
     private ImageView imgAddress;
@@ -58,9 +62,19 @@ public class NewCompanyFragment extends Fragment {
     private FloatingActionButton saveFab;
 
     NavController navController;
+    private long companyId;
+    private boolean editMode;
 
-    public static NewCompanyFragment newInstance() {
+
+/*    public static NewCompanyFragment newInstance() {
         return new NewCompanyFragment();
+    }*/
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Objects.requireNonNull(getArguments());
+        companyId = getArguments().getLong("COMPANY_ID");
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -78,7 +92,24 @@ public class NewCompanyFragment extends Fragment {
                 , AppDatabase.getInstance(requireContext().getApplicationContext()).companyDao())))
                 .get(NewCompanyFragmentViewModel.class);
         setupViews();
+/*
         validateFields();
+*/
+        if(companyId != 0) {
+            editMode = true;
+            viewModel.getCompany(companyId).observe(getViewLifecycleOwner(), this::showCompany);
+        }
+    }
+
+    private void showCompany(Company company) {
+        viewModel.setCompanyCompare(company);
+        txtName.setText(company.getName());
+        txtTlfo.setText(company.getPhone());
+        txtCif.setText(company.getCif());
+        txtAddress.setText(company.getAddress());
+        txtEmail.setText(company.getEmail());
+        txtContact.setText(company.getContactName());
+        txtUrl.setText(company.getUrl());
     }
 
     private void setupViews() {
@@ -88,7 +119,7 @@ public class NewCompanyFragment extends Fragment {
         txtAddress = ViewCompat.requireViewById(requireView(), R.id.nc_txtAddress);
         txtEmail = ViewCompat.requireViewById(requireView(), R.id.nc_txtEmail);
         txtContact = ViewCompat.requireViewById(requireView(), R.id.nc_txtContact);
-        //url = ViewCompat.requireViewById(requireView(), R.id.nc_txtURL);
+        txtUrl = ViewCompat.requireViewById(requireView(), R.id.nc_txtURL);
 
         lblName = ViewCompat.requireViewById(requireView(), R.id.nc_lblName);
         lblTlfo = ViewCompat.requireViewById(requireView(), R.id.nc_lblTlfo);
@@ -96,7 +127,7 @@ public class NewCompanyFragment extends Fragment {
         lblAddress = ViewCompat.requireViewById(requireView(), R.id.nc_lblAddress);
         lblEmail = ViewCompat.requireViewById(requireView(), R.id.nc_lblEmail);
         lblContact = ViewCompat.requireViewById(requireView(), R.id.nc_lblContact);
-//        lblUrl = ViewCompat.requireViewById(requireView(), R.id.nc_lblURL);
+        lblUrl = ViewCompat.requireViewById(requireView(), R.id.nc_lblURL);
 
         imgPhone = ViewCompat.requireViewById(requireView(), R.id.nc_imgTlfo);
         imgAddress = ViewCompat.requireViewById(requireView(), R.id.nc_imgAddress);
@@ -121,7 +152,7 @@ public class NewCompanyFragment extends Fragment {
         lblAddress.setEnabled(viewModel.isStateAddress());
         lblEmail.setEnabled(viewModel.isStateEmail());
         lblContact.setEnabled(viewModel.isStateContact());
-//        lblUrl.setEnabled(viewModel.isStateName());
+        lblUrl.setEnabled(viewModel.isStateName());
 
         imgPhone.setEnabled(viewModel.isStatePhoneImg());
         imgAddress.setEnabled(viewModel.isStateAddressImg());
@@ -135,6 +166,7 @@ public class NewCompanyFragment extends Fragment {
         txtAddress.addTextChangedListener(gestorTextWatcher);
         txtEmail.addTextChangedListener(gestorTextWatcher);
         txtContact.addTextChangedListener(gestorTextWatcher);
+        txtUrl.addTextChangedListener(gestorTextWatcher);
     }
 
     private class GestorTextWatcher implements TextWatcher {
@@ -167,6 +199,8 @@ public class NewCompanyFragment extends Fragment {
                 checkEmail(lblEmail, txtEmail, imgEmail);
             } else if (getActivity().getCurrentFocus().getId() == txtContact.getId()) {
                 checkString(lblContact, txtContact);
+            } else if (getActivity().getCurrentFocus().getId() == txtUrl.getId()) {
+                checkString(lblUrl, txtUrl);
             }
         }
     }
@@ -178,6 +212,7 @@ public class NewCompanyFragment extends Fragment {
         txtAddress.setOnFocusChangeListener((v, hasFocus) -> setBold(lblAddress, txtAddress));
         txtEmail.setOnFocusChangeListener((v, hasFocus) -> setBold(lblEmail, txtEmail));
         txtContact.setOnFocusChangeListener((v, hasFocus) -> setBold(lblContact, txtContact));
+        txtUrl.setOnFocusChangeListener((v, hasFocus) -> setBold(lblUrl, txtUrl));
     }
 
     private void setBold(TextView textView, EditText editText) {
@@ -192,6 +227,13 @@ public class NewCompanyFragment extends Fragment {
         imgPhone.setOnClickListener(v -> callPhone());
         imgAddress.setOnClickListener(v -> searchAddress());
         imgEmail.setOnClickListener(v -> sendEmail());
+        txtUrl.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                save();
+                return true;
+            }
+            return false;
+        });
 
         saveFab.setOnClickListener(v -> save());
     }
@@ -205,8 +247,21 @@ public class NewCompanyFragment extends Fragment {
                     txtCif.getText().toString(),
                     txtAddress.getText().toString(),
                     txtEmail.getText().toString(),
-                    txtContact.getText().toString());
-            viewModel.insert(company);
+                    txtContact.getText().toString(),
+                    txtUrl.getText().toString());
+            if(editMode) {
+                company.setId(companyId);
+                if(company.equals(viewModel.getCompanyCompare())){
+                    Snackbar.make(requireView(), "No ha habido cambios", Snackbar.LENGTH_LONG).show();
+                } else {
+                    viewModel.update(company);
+                    Snackbar.make(requireView(), "¡Empresa modificada con éxito!", Snackbar.LENGTH_LONG).show();
+                }
+            } else {
+                viewModel.insert(company);
+                Snackbar.make(requireView(), "¡Empresa guardada con éxito!", Snackbar.LENGTH_LONG).show();
+            }
+
             getFragmentManager().popBackStack();
 //            navController.navigate(R.id.companiesListFragment);
         }
@@ -240,6 +295,7 @@ public class NewCompanyFragment extends Fragment {
         checkStringImg(lblAddress, txtAddress, imgAddress);
         checkEmail(lblEmail, txtEmail, imgEmail);
         checkString(lblContact, txtContact);
+        checkString(lblUrl, txtUrl);
     }
 
     private void enabledDisabledFieldImg(TextView textView, EditText editText, ImageView imageView, boolean valid) {
@@ -279,14 +335,14 @@ public class NewCompanyFragment extends Fragment {
             viewModel.setStateEmailImg(state);
         } else if(view == txtContact) {
             viewModel.setStateContact(state);
-        } /*else if(view == txtUrl) {
+        } else if(view == txtUrl) {
             viewModel.setStateUrl(state);
-        } */
+        }
     }
 
     private boolean validateAll() {
         checkAll();
-        View[] array = new View[]{lblName, lblTlfo, lblCif, lblAddress, lblEmail, lblContact};
+        View[] array = new View[]{lblName, lblTlfo, lblCif, lblAddress, lblEmail, lblContact, lblUrl};
         for (View view: array) {
             if(!view.isEnabled()) {
                 return false;

@@ -24,7 +24,9 @@ import android.widget.TextView;
 import com.example.lot_pr10_fct.R;
 import com.example.lot_pr10_fct.data.RepositoryImpl;
 import com.example.lot_pr10_fct.data.local.AppDatabase;
+import com.example.lot_pr10_fct.data.local.model.Company;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CompaniesListFragment extends Fragment {
 
@@ -33,10 +35,6 @@ public class CompaniesListFragment extends Fragment {
     NavController navController;
     private FloatingActionButton fab;
     private TextView imagen;
-
-    public static CompaniesListFragment newInstance() {
-        return new CompaniesListFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -63,7 +61,7 @@ public class CompaniesListFragment extends Fragment {
     private void setupRecyclerView(View view) {
         RecyclerView lstCompanies = ViewCompat.requireViewById(view, R.id.cl_rv_companiesList);
         lstCompanies.setHasFixedSize(true);
-        listAdapter = new CompaniesListFragmentAdapter(navController);
+        listAdapter = new CompaniesListFragmentAdapter(navController, getContext());
         lstCompanies.setAdapter(listAdapter);
         lstCompanies.setLayoutManager(
                 new LinearLayoutManager(requireActivity()));
@@ -80,7 +78,11 @@ public class CompaniesListFragment extends Fragment {
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                          int direction) {
-                        viewModel.deleteCompany(listAdapter.getItem(viewHolder.getAdapterPosition()));
+                        Company companyToDelete = listAdapter.getItem(viewHolder.getAdapterPosition());
+                        viewModel.setCompanyToDelete(companyToDelete);
+                        viewModel.deleteCompany(companyToDelete);
+                        Snackbar.make(requireView(), "Empresa eliminada", Snackbar.LENGTH_LONG)
+                                .setAction("Deshacer", view1 -> viewModel.insertCompany(viewModel.getCompanyToDelete())).show();
                     }
                 });
         itemTouchHelper.attachToRecyclerView(lstCompanies);
@@ -97,8 +99,10 @@ public class CompaniesListFragment extends Fragment {
         fab = ViewCompat.requireViewById(view, R.id.cl_fab);
         imagen = ViewCompat.requireViewById(view, R.id.cl_lblEmptyView);
 
-        fab.setOnClickListener(v -> navController.navigate(R.id.newCompanyFragment));
-        imagen.setOnClickListener(v -> navController.navigate(R.id.newCompanyFragment));
+        Bundle bundle = new Bundle();
+        bundle.putLong("COMPANY_ID", 0);
+        fab.setOnClickListener(v -> navController.navigate(R.id.action_companiesListFragment_to_newCompanyFragment, bundle));
+        imagen.setOnClickListener(v -> navController.navigate(R.id.action_companiesListFragment_to_newCompanyFragment, bundle));
     }
 
 

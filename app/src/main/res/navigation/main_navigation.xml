@@ -26,7 +26,9 @@
         android:id="@+id/newVisitFragment"
         android:name="com.example.lot_pr10_fct.ui.visits.newVisit.NewVisitFragment"
         android:label="Nueva visita"
-        tools:layout="@layout/fragment_new_visit" />
+        tools:layout="@layout/fragment_new_visit" >
+        <argument android:name="VISIT_ID" />
+    </fragment>
 
     <fragment
         android:id="@+id/editVisitFragment"
@@ -62,13 +64,22 @@
         android:id="@+id/newCompanyFragment"
         android:name="com.example.lot_pr10_fct.ui.company.newCompany.NewCompanyFragment"
         android:label="Nueva empresa"
-        tools:layout="@layout/fragment_new_company" />
+        tools:layout="@layout/fragment_new_company" >
+        <argument
+            android:name="COMPANY_ID"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 
     <fragment
         android:id="@+id/newStudentFragment"
         android:name="com.example.lot_pr10_fct.ui.student.newStudent.NewStudentFragment"
         android:label="Nuevo estudiante"
-        tools:layout="@layout/fragment_new_student" />
+        tools:layout="@layout/fragment_new_student" >
+        <argument
+            android:name="STUDENT_ID"
+            app:argType="long" />
+    </fragment>
 
     <fragment
         android:id="@+id/studentsListFragment"
@@ -76,10 +87,10 @@
         android:label="Estudiantes"
         tools:layout="@layout/fragment_students_list">
         <action
-            android:id="@+id/action_studentsListFragment2_to_newStudentFragment"
+            android:id="@+id/action_studentsListFragment_to_newStudentFragment"
             app:destination="@id/newStudentFragment" />
         <action
-            android:id="@+id/action_studentsListFragment2_to_editStudentFragment"
+            android:id="@+id/action_studentsListFragment_to_editStudentFragment"
             app:destination="@id/editStudentFragment" />
     </fragment>
     <fragment
@@ -96,6 +107,10 @@
         android:id="@+id/studentVisitsListFragment"
         android:name="com.example.lot_pr10_fct.ui.studentVisitsList.StudentVisitsListFragment"
         android:label="Visitas de estudiante"
-        tools:layout="@layout/fragment_student_visits_list" />
+        tools:layout="@layout/fragment_student_visits_list" >
+        <argument
+            android:name="STUDENT_ID_VISIT"
+            android:defaultValue="0" />
+    </fragment>
 
 </navigation>

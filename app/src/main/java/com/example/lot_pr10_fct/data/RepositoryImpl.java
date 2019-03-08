@@ -42,6 +42,11 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public LiveData<Visit> queryLastVisitsStudent(long studentId) {
+        return visitDao.queryLastVisitsStudent(studentId);
+    }
+
+    @Override
     public void insertVisit(Visit visit) {
         AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> visitDao.insert(visit));
     }
