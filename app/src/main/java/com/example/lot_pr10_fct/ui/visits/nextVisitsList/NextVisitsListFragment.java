@@ -56,8 +56,40 @@ public class NextVisitsListFragment extends Fragment {
 
         setupViews(requireView());
         setupRecyclerView(requireView());
-//        observeNextsVisits();
         observeStudents();
+        observeStudentVisits();
+        observeNextVisits();
+    }
+
+    private void observeNextVisits() {
+        viewModel.setNextVisits();
+        viewModel.getNextVisits().observe(getViewLifecycleOwner(), nextVisits -> {
+            listAdapter.submitList(nextVisits);
+        });
+    }
+
+    private void observeStudentVisits() {
+        List<Student> students = viewModel.getStudents();
+//        List<Visit> visitas = new ArrayList<>();
+        for(Student student: students) {
+            viewModel.getVisitsStudent(student.getId()).observe(getViewLifecycleOwner(), studentLD -> {
+                Visit visita = new Visit();
+                visita.setIdStudent(student.getId());
+                visita.setStudent(student.getName());
+                visita.setCompanyStudent(student.getCompany());
+                if(studentLD.getStudent().isEmpty()) {
+                    visita.setDate(null);
+                    visita.setObservations(null);
+                } else {
+                    visita.setDate(studentLD.getDate());
+                    visita.setObservations(studentLD.getObservations());
+                }
+//                visitas.add(visita);
+                viewModel.addVisit(visita);
+            });
+        }
+//        listAdapter.submitList(visitas);
+//        viewModel.setNextVisits(visitas);
     }
 
     private void setupRecyclerView(View view) {
@@ -93,14 +125,16 @@ public class NextVisitsListFragment extends Fragment {
 
     private void observeStudents() {
         viewModel.getStudentsLiveData().observe(getViewLifecycleOwner(), students -> {
-            Bundle bundle = new Bundle();
-            bundle.putLong("VISIT_ID", 0);
+
             if(students.isEmpty()) {
                 imagen.setVisibility(View.VISIBLE);
             } else {
                 imagen.setVisibility(View.INVISIBLE);
-                showList(students);
+                viewModel.setStudents(students);
             }
+
+            Bundle bundle = new Bundle();
+            bundle.putLong("VISIT_ID", 0);
             fab.setOnClickListener(v -> {
                 navigateNewVisit(students, bundle);
             });
@@ -108,7 +142,7 @@ public class NextVisitsListFragment extends Fragment {
         });
     }
 
-    private void showList(List<Student> students) {
+    /*private void showList(List<Student> students) {
         List<Visit> nextVisits = new ArrayList<>();
         for(Student student: students) {
             Visit visit = new Visit();
@@ -127,14 +161,35 @@ public class NextVisitsListFragment extends Fragment {
             });
         }
         observeNextVisits(nextVisits);
-    }
+    }*/
 
-    private void observeNextVisits(List<Visit> nextVis) {
+/*    private void showList(List<Student> students) {
+        List<Visit> nextVisits = new ArrayList<>();
+        for(Student student: students) {
+            Visit visit = new Visit();
+            viewModel.getVisitsStudent(student.getId()).observe(getViewLifecycleOwner(), visita -> {
+                if(visita == null) {
+                    visit.setStudent(student.getName());
+                    visit.setCompanyStudent(student.getCompany());
+                    visit.setDate(null);
+                    nextVisits.add(visit);
+                } else {
+                    visit.setStudent(student.getName());
+                    visit.setCompanyStudent(student.getCompany());
+                    visit.setDate(visita.getDate());
+                    nextVisits.add(visit);
+                }
+            });
+        }
+        observeNextVisits(nextVisits);
+    }*/
+
+/*    private void observeNextVisits(List<Visit> nextVis) {
         viewModel.setNextVisits(nextVis);
         viewModel.getNextVisits().observe(getViewLifecycleOwner(), nextVisits -> {
             listAdapter.submitList(nextVisits);
         });
-    }
+    }*/
 
     private void navigateNewVisit(List<Student> students, Bundle bundle) {
         if(students.size() > 0) {

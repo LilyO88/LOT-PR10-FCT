@@ -23,7 +23,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CompanyDao companyDao();
 
     private static AppDatabase instance;
-//    private static volatile AppDatabase instance;
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {

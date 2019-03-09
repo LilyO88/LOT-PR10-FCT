@@ -3,14 +3,11 @@ package com.example.lot_pr10_fct.data.local.model;
 import java.util.Date;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
-import static androidx.room.ForeignKey.CASCADE;
 import static androidx.room.ForeignKey.NO_ACTION;
 
 @Entity(tableName = "students",
@@ -19,9 +16,7 @@ import static androidx.room.ForeignKey.NO_ACTION;
                         childColumns = "company",
                         onUpdate = NO_ACTION,
                         onDelete = NO_ACTION)},
-        indices = {@Index(value = {"name"}, unique = true),
-                @Index(value = {"company"}, unique = true),
-                @Index(value = {"id"}, unique = true)})
+        indices = {@Index(value = {"id"}, unique = true)})
 public class Student {
 
     @PrimaryKey(autoGenerate = true)
